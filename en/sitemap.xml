@@ -131,5 +131,17 @@
                 hreflang="en"
                 href="https://manfcg.github.io/en/about/"
                 />
+  </url><url>
+    <loc>https://manfcg.github.io/en/archives/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://manfcg.github.io/pl/archives/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://manfcg.github.io/en/archives/"
+                />
   </url>
 </urlset>
