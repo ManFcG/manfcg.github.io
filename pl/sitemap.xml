@@ -2,6 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://manfcg.github.io/pl/categories/</loc>
+    <lastmod>2025-01-02T21:03:00+01:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://manfcg.github.io/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://manfcg.github.io/pl/categories/"
+                />
+  </url><url>
     <loc>https://manfcg.github.io/pl/</loc>
     <lastmod>2025-01-02T21:03:00+01:00</lastmod>
     <xhtml:link
@@ -93,6 +106,19 @@
                 href="https://manfcg.github.io/pl/tags/writeup/"
                 />
   </url><url>
+    <loc>https://manfcg.github.io/pl/categories/writeup/</loc>
+    <lastmod>2025-01-02T21:03:00+01:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://manfcg.github.io/en/categories/writeup/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://manfcg.github.io/pl/categories/writeup/"
+                />
+  </url><url>
     <loc>https://manfcg.github.io/pl/about/</loc>
     <lastmod>2025-01-01T01:40:51+01:00</lastmod>
     <xhtml:link
@@ -104,18 +130,6 @@
                 rel="alternate"
                 hreflang="pl"
                 href="https://manfcg.github.io/pl/about/"
-                />
-  </url><url>
-    <loc>https://manfcg.github.io/pl/categories/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://manfcg.github.io/en/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="pl"
-                href="https://manfcg.github.io/pl/categories/"
                 />
   </url>
 </urlset>
