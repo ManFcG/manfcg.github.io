@@ -11,8 +11,42 @@
     </image>
     <generator>Hugo -- 0.140.2</generator>
     <language>pl</language>
-    <lastBuildDate>Thu, 02 Jan 2025 21:03:00 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jan 2025 18:59:48 +0100</lastBuildDate>
     <atom:link href="https://manfcg.github.io/pl/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>THM Writeup - Thompson</title>
+      <link>https://manfcg.github.io/pl/posts/thm-thompson/</link>
+      <pubDate>Fri, 03 Jan 2025 18:59:48 +0100</pubDate>
+      <guid>https://manfcg.github.io/pl/posts/thm-thompson/</guid>
+      <description>&lt;p&gt;Zacząłem od enumeracji&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -oN nmap.txt -Pn -T4 -sC -sV 10.10.188.85
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+8009/tcp open  ajp13    Apache Jserv (Protocol v1.3)
+8080/tcp open  http     Apache Tomcat 8.5.5
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Wszedłem sobie na stronkę &lt;code&gt;http://10.10.188.85:8080&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://manfcg.github.io/pl/posts/thm-thompson/1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Kliknąłem Manager App i poprosiło mnie to o login&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://manfcg.github.io/pl/posts/thm-thompson/2.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;spróbowałem &lt;code&gt;admin:tomcat&lt;/code&gt; i &lt;code&gt;tomcat:tomcat&lt;/code&gt; ale nie weszło, nacisnąłem więc cancel i wyświetliły mi się ciekawe informacje&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>THM Writeup - Cyborg</title>
+      <link>https://manfcg.github.io/pl/posts/thm-cyborg/</link>
+      <pubDate>Fri, 03 Jan 2025 18:32:59 +0100</pubDate>
+      <guid>https://manfcg.github.io/pl/posts/thm-cyborg/</guid>
+      <description>&lt;p&gt;Mamy takie pytanka na które musimy odpowiedzieć:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Scan the machine, how many ports are open?&lt;/li&gt;
+&lt;li&gt;What service is running on port 22?&lt;/li&gt;
+&lt;li&gt;What service is running on port 80?&lt;/li&gt;
+&lt;li&gt;What is the user.txt flag?&lt;/li&gt;
+&lt;li&gt;What is the root.txt flag?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Na porcie 22 jest defaultowo ssh, a na porcie 80 jest http, lecz pierw sprawdźmy to skanem nmapa - przy okazji uda nam się wtedy odpowiedzieć na pytanie numer 1&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -oN nmap.txt -Pn -T4 -sC -sV -p- 10.10.127.219
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Dostałem od razu warning o treści &lt;code&gt;Warning: 10.10.127.219 giving up on port because retransmission cap hit (6).&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>THM Writeup - Lazy Admin</title>
       <link>https://manfcg.github.io/pl/posts/thm-lazy-admin/</link>
