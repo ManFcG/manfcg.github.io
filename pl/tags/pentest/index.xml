@@ -18,7 +18,8 @@
       <link>https://manfcg.github.io/pl/posts/thm-thompson/</link>
       <pubDate>Fri, 03 Jan 2025 18:59:48 +0100</pubDate>
       <guid>https://manfcg.github.io/pl/posts/thm-thompson/</guid>
-      <description>&lt;p&gt;Zacząłem od enumeracji&lt;/p&gt;
+      <description>&lt;p&gt;Link do room&amp;rsquo;u: &lt;a href=&#34;https://tryhackme.com/r/room/bsidesgtthompson&#34;&gt;https://tryhackme.com/r/room/bsidesgtthompson&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Zacząłem od enumeracji&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -oN nmap.txt -Pn -T4 -sC -sV 10.10.188.85
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;PORT   STATE SERVICE VERSION
 22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
@@ -35,7 +36,8 @@
       <link>https://manfcg.github.io/pl/posts/thm-cyborg/</link>
       <pubDate>Fri, 03 Jan 2025 18:32:59 +0100</pubDate>
       <guid>https://manfcg.github.io/pl/posts/thm-cyborg/</guid>
-      <description>&lt;p&gt;Mamy takie pytanka na które musimy odpowiedzieć:&lt;/p&gt;
+      <description>&lt;p&gt;Link do room&amp;rsquo;u: &lt;a href=&#34;https://tryhackme.com/r/room/cyborgt8&#34;&gt;https://tryhackme.com/r/room/cyborgt8&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Mamy takie pytanka na które musimy odpowiedzieć:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Scan the machine, how many ports are open?&lt;/li&gt;
 &lt;li&gt;What service is running on port 22?&lt;/li&gt;
@@ -43,16 +45,15 @@
 &lt;li&gt;What is the user.txt flag?&lt;/li&gt;
 &lt;li&gt;What is the root.txt flag?&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Na porcie 22 jest defaultowo ssh, a na porcie 80 jest http, lecz pierw sprawdźmy to skanem nmapa - przy okazji uda nam się wtedy odpowiedzieć na pytanie numer 1&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -oN nmap.txt -Pn -T4 -sC -sV -p- 10.10.127.219
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Dostałem od razu warning o treści &lt;code&gt;Warning: 10.10.127.219 giving up on port because retransmission cap hit (6).&lt;/code&gt;&lt;/p&gt;</description>
+&lt;p&gt;Na porcie 22 jest defaultowo ssh, a na porcie 80 jest http, lecz pierw sprawdźmy to skanem nmapa - przy okazji uda nam się wtedy odpowiedzieć na pytanie numer 1&lt;/p&gt;</description>
     </item>
     <item>
       <title>THM Writeup - Lazy Admin</title>
       <link>https://manfcg.github.io/pl/posts/thm-lazy-admin/</link>
       <pubDate>Thu, 02 Jan 2025 21:03:00 +0100</pubDate>
       <guid>https://manfcg.github.io/pl/posts/thm-lazy-admin/</guid>
-      <description>&lt;p&gt;Rozpocznę sobie całość skanem z nmapa, a w tle puszczę gobustera&lt;/p&gt;
+      <description>&lt;p&gt;Link do room&amp;rsquo;u: &lt;a href=&#34;https://tryhackme.com/r/room/lazyadmin&#34;&gt;https://tryhackme.com/r/room/lazyadmin&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Rozpocznę sobie całość skanem z nmapa, a w tle puszczę gobustera&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -oN nmap.txt -Pn -T4 -sC -sV -p- 10.10.19.199 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;PORT   STATE SERVICE VERSION
 22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
