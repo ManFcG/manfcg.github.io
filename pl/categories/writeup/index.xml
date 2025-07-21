@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Writeup on ManFcG</title>
+    <link>https://manfcg.pl/pl/categories/writeup/</link>
+    <description>Recent content in Writeup on ManFcG</description>
+    <image>
+      <title>ManFcG</title>
+      <url>https://manfcg.pl/1724855710421.jpg</url>
+      <link>https://manfcg.pl/1724855710421.jpg</link>
+    </image>
+    <generator>Hugo -- 0.140.2</generator>
+    <language>pl</language>
+    <lastBuildDate>Sun, 06 Jul 2025 15:02:00 +0100</lastBuildDate>
+    <atom:link href="https://manfcg.pl/pl/categories/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ECSC 25 Polish Qualifications - Photo Archiver - Web challange</title>
+      <link>https://manfcg.pl/pl/posts/ecsc25-photo-archiver/</link>
+      <pubDate>Sun, 06 Jul 2025 15:02:00 +0100</pubDate>
+      <guid>https://manfcg.pl/pl/posts/ecsc25-photo-archiver/</guid>
+      <description>&lt;h2 id=&#34;photo-archiver&#34;&gt;Photo Archiver&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;(39 rozwiązań)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Opis tego zadania brzmi:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Don&amp;rsquo;t you hate when a very cool page goes down and all of your bookmarked memes go down? That&amp;rsquo;s why I created a service to archive random URLs on the Internet.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ponadto, &lt;a href=&#34;https://photo-archiver.ecsc25.hack.cert.pl/source&#34;&gt;kod źródłowy&lt;/a&gt; jest dostępny po odwiedzeniu strony podanej w zadaniu.&lt;/p&gt;
+&lt;h2 id=&#34;analiza-podatności&#34;&gt;Analiza podatności&lt;/h2&gt;
+&lt;h3 id=&#34;ominięcie-ochrony-przed-ssrf&#34;&gt;Ominięcie ochrony przed SSRF&lt;/h3&gt;
+&lt;p&gt;Filtr SSRF próbuje blokować żądania do localhosta poprzez rozwiązanie nazwy hosta i sprawdzenie, czy jest to &lt;code&gt;127.0.0.1&lt;/code&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ECSC 25 Polish Qualifications - Caller - Misc challange</title>
+      <link>https://manfcg.pl/pl/posts/ecsc25-caller/</link>
+      <pubDate>Sun, 06 Jul 2025 15:01:00 +0100</pubDate>
+      <guid>https://manfcg.pl/pl/posts/ecsc25-caller/</guid>
+      <description>&lt;h2 id=&#34;caller&#34;&gt;Caller&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;(51 rozwiązań)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Opis tego zadania brzmi:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Naming things is hard.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Dodatkowo został dołączony &lt;a href=&#34;https://ctf101.org/faq/connecting-to-services/&#34;&gt;netcat&lt;/a&gt;, który wykonuje:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;os&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;uuid&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;FLAG&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;flag.txt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;arg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;gt; &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;blacklist&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;{&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;}&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;arg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;or&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;any&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;([&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;arg&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;blacklist&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Bad input!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;template&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;#include &amp;lt;string.h&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;char* f()&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    char* flag = &amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FLAG&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    printf(&amp;#34;%s&amp;#34;,flag);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    return flag;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;}}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;void g(char* &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;arg&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;{{}}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;int main()&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;{{&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    g(NULL);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;    return 0;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;}}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;/tmp/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.c&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;outfile&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;/tmp/&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;template&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;system&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;export PATH=$PATH:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin &amp;amp;&amp;amp; gcc &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; -o &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;outfile&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;system&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;outfile&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;remove&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;remove&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;outfile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;analiza-podatności&#34;&gt;Analiza podatności&lt;/h2&gt;
+&lt;h3 id=&#34;input-injection&#34;&gt;Input injection&lt;/h3&gt;
+&lt;p&gt;Luka tkwi w sposobie, w jaki dane wejściowe użytkownika są wstawiane bezpośrednio do deklaracji funkcji C jako nazwa parametru:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>1753CTF 2025 - Noticed? - OSINT challange</title>
+      <link>https://manfcg.pl/pl/posts/1753ctf-noticed/</link>
+      <pubDate>Sat, 12 Apr 2025 19:00:00 +0100</pubDate>
+      <guid>https://manfcg.pl/pl/posts/1753ctf-noticed/</guid>
+      <description>&lt;h2 id=&#34;wprowadzenie&#34;&gt;Wprowadzenie&lt;/h2&gt;
+&lt;p&gt;Rozwiązałem challange osintowy o nazwie &amp;ldquo;Noticed?&amp;rdquo; z CTFa 1753CTF, więcej informacji o tym CTFie można znaleźć &lt;a href=&#34;https://ctftime.org/event/2639/&#34;&gt;tutaj&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;osint_noticed&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/1753ctf-noticed/osint_noticed.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;noticed&#34;&gt;Noticed?&lt;/h2&gt;
+&lt;p&gt;Nie ukrywam, że był to ciekawy challange. Miałem pokazany sam tekst i z niego trzeba było wyciągnąć flagę.&lt;/p&gt;
+&lt;p&gt;No, ale ten tekst był z teasera 1753ctf, którego oglądałem - więc od razu po zobaczeniu tego tekstu wszedłem na &lt;a href=&#34;https://www.youtube.com/watch?v=yRghHj9dkoo&#34;&gt;youtube&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Zastanawiałem się co zrobić z tym filmikiem. Obejrzałem go kilkanaście razy, googlowałem po platformach społecznościowych, ale ciągle bez flagi.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>swampCTF 2025 - Editor - Web challange</title>
+      <link>https://manfcg.pl/pl/posts/swamp-editor/</link>
+      <pubDate>Sun, 30 Mar 2025 22:01:00 +0100</pubDate>
+      <guid>https://manfcg.pl/pl/posts/swamp-editor/</guid>
+      <description>&lt;h2 id=&#34;wprowadzenie&#34;&gt;Wprowadzenie&lt;/h2&gt;
+&lt;p&gt;Rozwiązałem challange &amp;ldquo;Editor&amp;rdquo; który jest w kategorii Web. Więcej informacji o tym CTFie można znaleźć &lt;a href=&#34;https://ctftime.org/event/2573&#34;&gt;tutaj&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Editor&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/swamp-editor/editor.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;editor&#34;&gt;Editor&lt;/h2&gt;
+&lt;p&gt;Wszedłem na stronę, która znajdowała się w opisie challange&amp;rsquo;u i wyświetlił mi się tekst &amp;ldquo;Forbidden&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;forbidden&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/swamp-editor/forbidden.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Skonfigurowałem serwer webowy lokalnie, pobierając załącznik, a następnie przechodząc do backendu i wpisując &lt;code&gt;python server.py&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;wszedłem na stronę, którą zhostowałem lokalnie (i ponownie Forbidden)&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;forbidden&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/swamp-editor/forbidden.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;sprawdziłem source code tej strony&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;source code&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/swamp-editor/source.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;i dodałem następujący fragment kodu do &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>swampCTF 2025 - OSINT challenges</title>
+      <link>https://manfcg.pl/pl/posts/swamp-osint/</link>
+      <pubDate>Sun, 30 Mar 2025 22:00:00 +0100</pubDate>
+      <guid>https://manfcg.pl/pl/posts/swamp-osint/</guid>
+      <description>&lt;h2 id=&#34;wprowadzenie&#34;&gt;Wprowadzenie&lt;/h2&gt;
+&lt;p&gt;Rozwiązałem wszystkie 3 z 3 challange&amp;rsquo;y OSINTowych. Więcej informacji o tym CTFie można znaleźć &lt;a href=&#34;https://ctftime.org/event/2573&#34;&gt;tutaj&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;osint&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/swamp-osint/osint.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;party-time&#34;&gt;Party Time!&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;party time&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/swamp-osint/party_time.png&#34;&gt;
+&lt;img alt=&#34;first blood&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/swamp-osint/first.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To był prosty challenge - i zdobyłem first blooda na nim! Celem było znalezienie lokalizacji na podstawie zdjęcia. Aby rozwiązać ten challenge, po prostu wyodrębniłem metadane i zrobiłem z nich flagę (składnia została podana w opisie challange&amp;rsquo;u).&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;party time photo&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/swamp-osint/IMG_4048.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Użyłem &lt;code&gt;exiftool&lt;/code&gt; do sprawdzenia metadanych na tym zdjęciu:&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;party time exiftool&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/swamp-osint/party_time_1.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>THM Writeup - Thompson</title>
+      <link>https://manfcg.pl/pl/posts/thm-thompson/</link>
+      <pubDate>Fri, 03 Jan 2025 18:59:48 +0100</pubDate>
+      <guid>https://manfcg.pl/pl/posts/thm-thompson/</guid>
+      <description>&lt;p&gt;Link do room&amp;rsquo;u: &lt;a href=&#34;https://tryhackme.com/r/room/bsidesgtthompson&#34;&gt;https://tryhackme.com/r/room/bsidesgtthompson&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Zacząłem od enumeracji&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -oN nmap.txt -Pn -T4 -sC -sV 10.10.188.85
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+8009/tcp open  ajp13    Apache Jserv (Protocol v1.3)
+8080/tcp open  http     Apache Tomcat 8.5.5
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Wszedłem sobie na stronkę &lt;code&gt;http://10.10.188.85:8080&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/thm-thompson/1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Kliknąłem Manager App i poprosiło mnie to o login&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/pl/posts/thm-thompson/2.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;spróbowałem &lt;code&gt;admin:tomcat&lt;/code&gt; i &lt;code&gt;tomcat:tomcat&lt;/code&gt; ale nie weszło, nacisnąłem więc cancel i wyświetliły mi się ciekawe informacje&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>THM Writeup - Cyborg</title>
+      <link>https://manfcg.pl/pl/posts/thm-cyborg/</link>
+      <pubDate>Fri, 03 Jan 2025 18:32:59 +0100</pubDate>
+      <guid>https://manfcg.pl/pl/posts/thm-cyborg/</guid>
+      <description>&lt;p&gt;Link do room&amp;rsquo;u: &lt;a href=&#34;https://tryhackme.com/r/room/cyborgt8&#34;&gt;https://tryhackme.com/r/room/cyborgt8&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Mamy takie pytanka na które musimy odpowiedzieć:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Scan the machine, how many ports are open?&lt;/li&gt;
+&lt;li&gt;What service is running on port 22?&lt;/li&gt;
+&lt;li&gt;What service is running on port 80?&lt;/li&gt;
+&lt;li&gt;What is the user.txt flag?&lt;/li&gt;
+&lt;li&gt;What is the root.txt flag?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Na porcie 22 jest defaultowo ssh, a na porcie 80 jest http, lecz pierw sprawdźmy to skanem nmapa - przy okazji uda nam się wtedy odpowiedzieć na pytanie numer 1&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>THM Writeup - Lazy Admin</title>
+      <link>https://manfcg.pl/pl/posts/thm-lazy-admin/</link>
+      <pubDate>Thu, 02 Jan 2025 21:03:00 +0100</pubDate>
+      <guid>https://manfcg.pl/pl/posts/thm-lazy-admin/</guid>
+      <description>&lt;p&gt;Link do room&amp;rsquo;u: &lt;a href=&#34;https://tryhackme.com/r/room/lazyadmin&#34;&gt;https://tryhackme.com/r/room/lazyadmin&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Rozpocznę sobie całość skanem z nmapa, a w tle puszczę gobustera&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nmap -oN nmap.txt -Pn -T4 -sC -sV -p- 10.10.19.199 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;gobuster dir -o gobuster.txt -u 10.10.19.199 -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/.hta                 (Status: 403) [Size: 277]
+/.htaccess            (Status: 403) [Size: 277]
+/.htpasswd            (Status: 403) [Size: 277]
+/content              (Status: 301) [Size: 314] [--&amp;gt; http://10.10.19.199/content/]
+/index.html           (Status: 200) [Size: 11321]
+/server-status        (Status: 403) [Size: 277]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Wchodząc na adres serwera, pokazuje się domyślna strona po instalacji apache - więc tutaj nic nie znajdziemy&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

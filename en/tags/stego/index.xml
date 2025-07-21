@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Stego on ManFcG</title>
+    <link>https://manfcg.pl/en/tags/stego/</link>
+    <description>Recent content in Stego on ManFcG</description>
+    <image>
+      <title>ManFcG</title>
+      <url>https://manfcg.pl/1724855710421.jpg</url>
+      <link>https://manfcg.pl/1724855710421.jpg</link>
+    </image>
+    <generator>Hugo -- 0.140.2</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 12 Apr 2025 19:00:00 +0100</lastBuildDate>
+    <atom:link href="https://manfcg.pl/en/tags/stego/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1753CTF 2025 - Noticed? - OSINT challange</title>
+      <link>https://manfcg.pl/en/posts/1753ctf-noticed/</link>
+      <pubDate>Sat, 12 Apr 2025 19:00:00 +0100</pubDate>
+      <guid>https://manfcg.pl/en/posts/1753ctf-noticed/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I solved the OSINT challange called &amp;ldquo;Noticed?&amp;rdquo; from CTF 1753CTF, more information about this CTF can be found &lt;a href=&#34;https://ctftime.org/event/2639/&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;osint_noticed&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/en/posts/1753ctf-noticed/osint_noticed.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;noticed&#34;&gt;Noticed?&lt;/h2&gt;
+&lt;p&gt;I do not hide the fact that it was an interesting challenge. I had just some text and the flag had to be drawn from it.&lt;/p&gt;
+&lt;p&gt;Well, but this text was from the 1753ctf teaser I watched - so immediately after seeing this text I went to &lt;a href=&#34;https://www.youtube.com/watch?v=yRghHj9dkoo&#34;&gt;youtube&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I was wondering what to do with this video. I watched it a dozen times, googled it on social media platforms, but still without a flag.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>swampCTF 2025 - OSINT challenges</title>
+      <link>https://manfcg.pl/en/posts/swamp-osint/</link>
+      <pubDate>Sun, 30 Mar 2025 22:00:00 +0100</pubDate>
+      <guid>https://manfcg.pl/en/posts/swamp-osint/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I have solved all 3 of the 3 OSINT tasks. More info about this CTF is &lt;a href=&#34;https://ctftime.org/event/2573&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;osint&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/en/posts/swamp-osint/osint.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;party-time&#34;&gt;Party Time!&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;party time&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/en/posts/swamp-osint/party_time.png&#34;&gt;
+&lt;img alt=&#34;first blood&#34; loading=&#34;lazy&#34; src=&#34;https://manfcg.pl/en/posts/swamp-osint/first.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;It was a simple challenge - and I&amp;rsquo;ve got first blood on it! The goal was to find a location from a photo. To solve this challange I simply extracted the metadata, and made it flag with it (the syntax was given to us in the challange description).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
