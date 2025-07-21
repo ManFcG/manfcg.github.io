@@ -1,0 +1,85 @@
+---
+title: 'ECSC 25 Polish Qualifications - Photo Archiver - Web challange'
+description: 'ECSC 25 Polish Qualifications - Photo Archiver - Web challange'
+date: 2025-07-06T15:02:00+01:00
+tags: ['ecsc','ecsc25','misc','ctf','writeup']
+image: './ecsc.png'
+authors: ['manfcg']
+---
+
+## Photo Archiver
+*(39 solves)*
+
+The description of the challange:
+> Don't you hate when a very cool page goes down and all of your bookmarked memes go down? That's why I created a service to archive random URLs on the Internet.
+
+Also, the [source code](https://photo-archiver.ecsc25.hack.cert.pl/source) is provided when you visit the website given in the challenge.
+
+## Vulnerability Analysis
+
+### SSRF protection bypass
+
+The SSRF filter tries to block requests to localhost by resolving the hostname and checking if it is `127.0.0.1`:
+
+```python
+resolved = resolve_domain(parsed.hostname)
+
+if not resolved:
+    abort(400, "bad host")
+
+logging.info("resolved: %s", resolved)
+
+if resolved == "127.0.0.1":
+    abort(400, "bad ip")
+```
+
+However, the check is too narrow:
+- It only blocks `127.0.0.1`, but not other loopback addresses like `127.0.0.2`, `127.0.0.3`, etc.
+- The DNS rebinded domain can resolve to `127.0.0.2`, which is still a loopback address, but not exactly `127.0.0.1`.
+- This means you can use any other loopback address (except `127.0.0.1`, which is sanitized) to reach localhost services, and the filter won't catch it.
+
+### Flag function
+
+The flag is protected by the following route:
+
+```python
+@app.route("/flag")
+def get_flag():
+    remote_ip = request.environ.get('HTTP_X_REAL_IP')
+
+    if remote_ip and remote_ip != "127.0.0.1":
+        abort(401)
+
+    return make_response(FLAG)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=23612)
+```
+
+The `/flag` endpoint is designed to only return the flag if the request appears to come from localhost. It checks the `HTTP_X_REAL_IP` header, and if it's missing or set to `127.0.0.1`, the flag is returned. Otherwise, access is denied.
+
+However, when the server itself makes a request (as in SSRF), this header is often not set at all, or the request is seen as coming from localhost, which allows the flag to be returned.
+
+## Exploit
+
+To exploit this, submit the following URL to the archive form:
+
+```
+http://<dns-rebound-domain>:23612/flag#.png
+```
+
+The server downloads the flag and saves it as an image (`<img src="/image/flag">`) in your session storage.
+
+You can then visit `/image/flag` to retrieve the flag (it will be downloaded as a file; you need to open it in a text editor).
+
+```
+ecsc25{TOCTOU-is-a-weird-acronym}
+```
+
+### Why does it work?
+
+- Incomplete SSRF filter only blocks `127.0.0.1`, not all loopback addresses (`127.0.0.0/8`).
+- DNS rebinding allows you to use attacker-controlled DNS to resolve to internal or loopback addresses, bypassing SSRF filters that only check for `127.0.0.1`
+- The `/flag` endpoint checks `HTTP_X_REAL_IP`. Since the request is made locally, this header is likely missing or set to `None`, so it allows the request.
+- The fragment `#` is ignored by the HTTP protocol, so the server fetches `/flag`, not `/flag#.png`.
+- The `.png` at the end passes the file extension check.

@@ -1,0 +1,114 @@
+---
+title: 'ECSC 25 Polish Qualifications - Caller - Misc challange'
+description: 'ECSC 25 Polish Qualifications - Caller - Misc challange'
+date: 2025-07-06T15:01:00+01:00
+tags: ['ecsc','ecsc25','misc','ctf','writeup']
+image: './ecsc.png'
+authors: ['manfcg']
+---
+
+## Caller
+*(51 solves)*
+
+The description of the challange:
+> Naming things is hard. 
+
+Additionally a [netcat](https://ctf101.org/faq/connecting-to-services/) service is provided, that runs the following:
+
+```python
+import os
+import uuid
+
+
+def main():
+    FLAG = open("flag.txt", 'r').read().encode()
+    arg = input("> ")
+    blacklist = ['{', '}', ';', '\n']
+    if len(arg) > 10 or any([c in arg for c in blacklist]):
+        print("Bad input!")
+        return
+    template = f"""
+#include <stdio.h>
+#include <string.h>
+
+char* f(){{
+    char* flag = "{FLAG}";
+    printf("%s",flag);
+    return flag;
+}}
+
+void g(char* {arg}){{}}
+
+int main(){{
+    g(NULL);
+    return 0;
+}}
+"""
+    name = "test"
+    source = f"/tmp/{name}.c"
+    outfile = f"/tmp/{name}"
+    open(source, 'w').write(template)
+    os.system(f"export PATH=$PATH:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin && gcc {source} -o {outfile}")
+    os.system(f"{outfile}")
+    os.remove(source)
+    os.remove(outfile)
+
+
+main()
+```
+
+## Vulnerability Analysis
+
+### Input injection
+
+The vulnerability lies in how the user input is inserted directly into a C function declaration as the name of a parameter:
+
+```c
+void g(char* {arg}){{}}
+```
+
+Although there is a blacklist in place to filter characters like `{`, `}`, `;`, and `\n`, the application does not validate whether the input is a valid C identifier. This leads to the possibility of injecting arbitrary expressions in place of the parameter name, as long as the input stays within 10 characters and avoids the blacklisted characters.
+
+### Flag function
+
+The flag is stored in the `f()` function:
+
+```c
+char* f(){
+    char* flag = "{FLAG}";
+    printf("%s",flag);
+    return flag;
+}
+```
+
+We need to find a way to **call this function** during runtime.
+## Exploit
+
+Since the user input is inserted directly as a parameter name (without quotes or escaping), we can exploit C's allowance of **function calls or expressions inside brackets** for array indexing or pointer operations.
+
+For example, this input:
+```
+f[!f()]
+```
+
+Gets injected like this:
+```c
+void g(char* f[!f()]) { }
+```
+
+This results in:
+
+1. A call to `f()` during array indexing expression evaluation - which prints the flag (`printf("%s",flag);`).
+2. The result of `!f()` is used as an array index. But we don't care about its value - we just need the side effect of calling `f()`.
+
+```shell
+> f[!f()]
+b'ecsc25{thats_some_weird_variable_name}'
+```
+### Why does it work?
+
+- The code compiles because C allows expressions like `type name[expression]` in parameter declarations.
+- `f[!f()]` looks like an array of pointers named `f` with size `!f()` - but `f()` is called as part of evaluating that.
+- The expression `!f()` coerces the return value of `f()` (a non-null pointer) into a boolean, then negates it. Crucially, evaluating `!f()` calls `f()`as part of that process.
+- Because `f()` contains `printf("%s", flag);`, each evaluation of `!f()` triggers the flag to be printed, even though the boolean result (0 or 1) is irrelevant to the program’s logic.
+- Blacklist bypass: Since `f[!f()]` contains no braces `{}`, semicolons `;`, or newlines, and is under 10 characters, it bypasses the simple input filter while fully leveraging C’s type and expression rules.

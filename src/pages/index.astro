@@ -1,0 +1,107 @@
+---
+import BlogCard from '@/components/BlogCard.astro'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import SocialIcons from '@/components/SocialIcons.astro'
+import { buttonVariants } from '@/components/ui/button'
+import { PROFILE_LINKS, SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+import { getRecentPosts } from '@/lib/data-utils'
+
+const blog = await getRecentPosts(SITE.featuredPostCount)
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="Home" />
+  <section>
+    <div
+      class="from-card/50 via-card/50 rounded-lg border bg-gradient-to-br to-blue-500/5 backdrop-blur-sm"
+    >
+      <div class="flex flex-row items-center gap-3 p-4 sm:gap-8 sm:p-6">
+        {/* Text */}
+        <div class="flex w-full flex-1 flex-col items-start text-left">
+          <div class="mb-0.5 sm:mb-2">
+            <span class="text-muted-foreground font-mono text-xs sm:text-sm"
+              >$ whoami</span
+            >
+          </div>
+          <h3
+            class="from-primary to-primary/80 mb-0.5 bg-gradient-to-r bg-clip-text text-lg leading-tight font-medium text-transparent sm:mb-1 sm:text-3xl sm:leading-none"
+          >
+            Michał "ManFcG" Hinca
+          </h3>
+          <div class="mb-1 flex items-center gap-1 sm:mb-4 sm:gap-2">
+            <span class="text-muted-foreground font-mono text-xs sm:text-sm"
+              >root@manfcg:~#</span
+            >
+            <p class="text-muted-foreground text-xs sm:text-sm">
+              Cybersecurity <span class="text-primary font-medium"
+                >enthusiast</span
+              >
+            </p>
+          </div>
+          <p
+            class="text-muted-foreground mb-1 text-xs leading-tight sm:mb-2 sm:text-sm sm:leading-normal"
+          >
+            Hello! I am Michał, a cybersecurity and computer networking
+            enthusiast from Poland.
+            <Link
+              href="/about"
+              class="text-primary group ml-1 inline-flex items-center text-xs hover:underline"
+            >
+              More <span
+                class="ml-0.5 text-xs transition-transform group-hover:translate-x-0.5"
+                >&rarr;</span
+              >
+            </Link>
+          </p>
+          <div class="mt-1 sm:mt-3">
+            <SocialIcons links={PROFILE_LINKS} />
+          </div>
+        </div>
+        {/* Avatar */}
+        <div
+          class="relative flex h-20 w-20 flex-shrink-0 items-center justify-center sm:h-32 sm:w-32"
+        >
+          <div
+            class="from-primary/20 border-primary/20 absolute inset-0 rotate-3 rounded-xl border bg-gradient-to-br to-blue-500/10"
+          >
+          </div>
+          <img
+            src="/1724855710421.jpg"
+            alt="Profile photo"
+            class="relative z-10 h-full w-full rotate-3 rounded-xl object-cover"
+            style="border-radius: 0.75rem;"
+          />
+          <span
+            class="bg-primary border-background absolute -right-2 -bottom-2 z-20 flex h-6 w-6 items-center justify-center rounded-full border-2 text-sm text-white shadow-lg sm:h-8 sm:w-8 sm:text-lg"
+            style="transform: rotate(6deg);">👋</span
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="flex flex-col gap-y-4">
+    <h2 class="text-2xl font-medium">Latest posts</h2>
+    <ul class="flex flex-col gap-y-4">
+      {
+        blog.map((post) => (
+          <li>
+            <BlogCard entry={post} />
+          </li>
+        ))
+      }
+    </ul>
+    <div class="flex justify-center">
+      <Link
+        href="/blog"
+        class={buttonVariants({ variant: 'ghost' }) + ' group'}
+      >
+        See all posts <span
+          class="ml-1.5 transition-transform group-hover:translate-x-1"
+          >&rarr;</span
+        >
+      </Link>
+    </div>
+  </section>
+</Layout>
