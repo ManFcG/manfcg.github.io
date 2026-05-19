@@ -54,7 +54,7 @@ export const PROFILE_LINKS: SocialLink[] = [
     label: 'TryHackMe',
   },
   {
-    href: 'https://app.hackthebox.com/profile/497426',
+    href: 'https://app.hackthebox.com/users/497426',
     label: 'HackTheBox',
   },
   {
