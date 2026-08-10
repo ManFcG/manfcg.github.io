@@ -61,10 +61,6 @@ export const PROFILE_LINKS: SocialLink[] = [
     href: 'https://github.com/manfcg',
     label: 'GitHub',
   },
-  {
-    href: 'https://instagram.com/manfcg_',
-    label: 'Instagram',
-  },
 ]
 
 export const ICON_MAP: IconMap = {
