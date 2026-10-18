@@ -38,7 +38,7 @@ ctf@slash-udev-pod-main-slash-udev-479rf:/dev$ cat /dev/null
 
 it returns "nothing", but what we actually get back is the end-of-file (EOF) marker right away.
 
-Another detail here is that the Dockerfile compiles its own copy of `sudo` from a specific sudo-project branch: git clone --depth=1 --branch v1.9.17p2 https://github.com/sudo-project/sudo/. That tag happens to be the latest release, but chasing it leads nowhere - it's a red herring.
+Another detail here is that the Dockerfile compiles its own copy of `sudo` from a specific sudo-project branch: `git clone --depth=1 --branch v1.9.17p2 https://github.com/sudo-project/sudo/`. That tag happens to be the latest release, but chasing it leads nowhere - it's a red herring.
 
 ## Vulnerability Analysis
 In linux [everything is a file](https://en.wikipedia.org/wiki/Everything_is_a_file), so we can remove `/dev/null`, and create a [soft symlink](https://www.redhat.com/en/blog/linking-linux-explained) to `/flag.txt` in its place.
